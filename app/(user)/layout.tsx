@@ -18,9 +18,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="nb">
-      <body className={inter.className}>
+      <body className="flex flex-col justify-between min-h-screen mx-auto max-w-7xl">
         <Header />
-        <main>
+        <main className='flex-grow'>
           {children}
         </main>
         <Footer />
