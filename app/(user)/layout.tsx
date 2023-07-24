@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="nb">
-      <body className="flex flex-col justify-between min-h-screen mx-auto max-w-7xl">
+      <body className="flex flex-col justify-between min-h-screen p-10 mx-auto bg-gray max-w-7xl">
         <Header />
         <main className='flex-grow'>
           {children}

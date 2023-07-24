@@ -11,25 +11,15 @@ type Props = {
 const EventList = ({events}: Props) => {
   console.log(events)
   return (
-    <div>
-      <h2>Arrangementer</h2>
-      <ul>
+    <div className='w-2/3 px-10 py-10 bg-black text-gray'>
+      <h2 className='font-serif text-5xl font-normal text-center'>Arrangementer</h2>
+      <ul className='mt-10'>
         {events && events.map((event) => (
-          <li key={event._id} className='border-b group'>
+          <li key={event._id} className='pt-1 border-b-2 border-b-gray group'>
             <ClientSideRoute route={`/event/${event.slug.current}`}>
-              {event.mainImage && (
-                <div className='relative w-full transition-transform duration-200 ease-out h-80 drop-shadow-xl group-hover:scale-105'>
-                  <Image
-                    className='object-cover object-left lg:object-center'
-                    src={urlFor(event.mainImage).url()}
-                    alt={event.title}
-                    fill
-                  />
-                </div>
-              )}
-              <div className='flex justify-between font-bold'>
-                <h3>{event.title}</h3>
-                <p>
+              <div className='flex justify-between text-xl font-bold'>
+                <h3 className='leading-0'>{event.title}</h3>
+                <p className='leading-0'>
                   {new Date(event._createdAt).toLocaleDateString(
                     "no", {
                       day: "numeric",

@@ -15,11 +15,9 @@ type Props = {
 export const revalidate = 60; // revalidate every minute
 
 export async function generateStaticParams() {
-  const query = groq`*[_type=="event"]
-    {
-      slug
-    }
-  `;
+  const query = groq`*[_type=="event"]{
+    slug
+  }`;
   const events: Event[] = await client.fetch(query);
   const paths = events.map((event) => event.slug.current);
   return paths.map((slug) => ({ 
