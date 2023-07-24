@@ -11,6 +11,8 @@ import {apiVersion, dataset, projectId} from './sanity/env'
 import {schema} from './sanity/schema'
 
 export default defineConfig({
+  name: "Vaktbua",
+  title: "Vaktbua",
   basePath: '/studio',
   projectId,
   dataset,
