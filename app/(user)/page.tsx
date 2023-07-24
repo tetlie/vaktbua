@@ -10,9 +10,10 @@ const query = groq`
   } | order(_createdAt desc)
 `
 
+export const revalidate = 60; // revalidate every minute
+
 export default async function Home() {
   const events = await client.fetch(query)
-  console.log(events)
   return (
     <div>
       <h1>Vaktbua</h1>
