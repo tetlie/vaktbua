@@ -12,7 +12,7 @@ type Props = {
   };
 };
 
-export const revalidate = 60; // revalidate every minute
+export const revalidate = 60;
 
 export async function generateStaticParams() {
   const query = groq`*[_type=="event"]{
@@ -49,10 +49,10 @@ const Event = async ({ params: { slug } }: Props) => {
             <div className="flex justify-between text-xl font-bold">
               <div className="flex space-x-2">
                 {event.categories.map((category, i, arr) => (
-                  <>
-                    <span key={category._id}>{category.title}</span>
-                    {i < arr.length - 1 && <span key={i}>//</span>}
-                  </>
+                  <span key={category._id}>
+                    <span>{category.title}</span>
+                    {i < arr.length - 1 && <span key={i}>/</span>}
+                  </span>
                 ))}
               </div>
               <p className="leading-0">
@@ -71,7 +71,6 @@ const Event = async ({ params: { slug } }: Props) => {
           </p>
         </div>
       </section>
-      <section>{/* <PortableText value={event.body} components={RichTextComponents} /> */}</section>
     </article>
   );
 };

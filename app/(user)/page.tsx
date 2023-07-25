@@ -11,7 +11,7 @@ const query = groq`
   } | order(_createdAt desc)
 `;
 
-export const revalidate = 60; // revalidate every minute
+export const revalidate = 60;
 
 export default async function Home() {
   const events = await client.fetch(query);

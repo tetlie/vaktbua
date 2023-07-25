@@ -9,12 +9,9 @@ type Props = {
 };
 
 const EventList = ({ events }: Props) => {
-  console.log(events);
   return (
     <div className="w-2/3 px-10 py-10 bg-black text-gray">
-      <h2 className="font-serif text-5xl font-normal font-bold tracking-tighter text-center">
-        Arrangementer
-      </h2>
+      <h2 className="font-serif text-5xl font-bold tracking-tighter text-center">Arrangementer</h2>
       <ul className="mt-10">
         {events &&
           events.map((event) => (
