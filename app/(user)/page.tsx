@@ -34,7 +34,7 @@ export default async function Home() {
         </div>
       </section>
       <section className="flex items-center justify-center w-full mt-5 space-x-10 lg:mt-10">
-        <div className="text-6xl tracking-tight text-center md:text-7xl lg:text-8xl">
+        <div className="leading-[0.96em] text-6xl tracking-tight text-center  md:text-7xl lg:text-8xl">
           <p>Dele</p>
           <p>Samarbeide</p>
           <p>Delta</p>

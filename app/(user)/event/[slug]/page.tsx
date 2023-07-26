@@ -70,7 +70,7 @@ const Event = async ({ params: { slug } }: Props) => {
           </div>
         </div>
         <div className="flex flex-col items-center justify-center w-full mt-5 lg:mt-10">
-          <p className="text-6xl tracking-tight text-center md:text-7xl lg:text-8xl">
+          <p className="text-6xl tracking-tight text-center leading-[0.96em] md:text-7xl lg:text-8xl">
             {event.title}
           </p>
         </div>
