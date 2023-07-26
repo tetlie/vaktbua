@@ -20,7 +20,7 @@ export default async function Home() {
     <div>
       <section>
         <div className="flex flex-col items-center justify-center w-full">
-          <p className="tracking-tight font-normal leading-[0.94em] text-center text-black text-3xl md:text-4xl lg:text-5xl">
+          <p className="tracking-tight font-normal leading-[0.96em] text-center text-black text-3xl md:text-4xl lg:text-5xl">
             Kristiansands gjemte perle, ved foten av Odderøya med konserter og stor solrik hage.
           </p>
         </div>

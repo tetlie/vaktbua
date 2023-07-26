@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <header>
       <div className="flex flex-col items-center justify-center w-full">
-        <p className="font-serif text-3xl font-normal tracking-tighter text-center md:text-4xl lg:text-5xl">
+        <p className="font-serif text-3xl font-normal leading-[0.96em] tracking-tighter text-center md:text-4xl lg:text-5xl">
           I dag (lørdag) er Vaktbua åpent 14:00 – 02:30
         </p>
         <ClientSideRoute route={`/`}>
