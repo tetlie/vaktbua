@@ -37,7 +37,7 @@ const Event = async ({ params: { slug } }: Props) => {
     <article>
       <section>
         <div>
-          <div className="relative w-full transition-transform duration-200 ease-out h-96 drop-shadow-xl group-hover:scale-105">
+          <div className="relative w-full transition-transform duration-200 ease-out h-[50vh]">
             <Image
               className="object-cover object-left lg:object-center"
               src={urlFor(event.mainImage).url()}
@@ -45,13 +45,17 @@ const Event = async ({ params: { slug } }: Props) => {
               fill
             />
           </div>
-          <div className="mt-10">
-            <div className="flex justify-between text-xl font-bold">
+          <div className="mt-5 lg:mt-10">
+            <div className="flex justify-between text-lg lg:text-xl">
               <div className="flex space-x-2">
                 {event.categories.map((category, i, arr) => (
                   <span key={category._id}>
                     <span>{category.title}</span>
-                    {i < arr.length - 1 && <span key={i}>/</span>}
+                    {i < arr.length - 1 && (
+                      <span className="pl-2" key={i}>
+                        /
+                      </span>
+                    )}
                   </span>
                 ))}
               </div>
@@ -65,8 +69,8 @@ const Event = async ({ params: { slug } }: Props) => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center w-full mt-10">
-          <p className="tracking-tighter font-bold leading-[0.94em] text-center text-black text-8xl">
+        <div className="flex flex-col items-center justify-center w-full mt-5 lg:mt-10">
+          <p className="text-6xl tracking-tight text-center md:text-7xl lg:text-8xl">
             {event.title}
           </p>
         </div>

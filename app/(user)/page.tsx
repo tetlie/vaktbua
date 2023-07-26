@@ -3,6 +3,7 @@ import EventList from "../components/EventList";
 import { groq } from "next-sanity";
 import { client } from "@/sanity/lib/client";
 import EventFeatured from "../components/EventFeatured";
+import OpeningHours from "../components/OpeningHours";
 
 const query = groq`
   *[_type == "event"] {
@@ -19,32 +20,30 @@ export default async function Home() {
     <div>
       <section>
         <div className="flex flex-col items-center justify-center w-full">
-          <p className="tracking-tighter font-serif font-normal leading-[0.94em] text-center text-black text-8xl">
+          <p className="tracking-tight font-normal leading-[0.94em] text-center text-black text-3xl md:text-4xl lg:text-5xl">
             Kristiansands gjemte perle, ved foten av Odderøya med konserter og stor solrik hage.
           </p>
         </div>
       </section>
-      <section className="flex items-center w-full mt-10 space-x-10">
-        <EventFeatured event={events[0]} />
-        <EventList events={events} />
+      <section className="items-center w-full mt-5 space-y-5 lg:mt-10 lg:flex lg:space-x-10">
+        <div className="w-full lg:w-1/3 ">
+          <EventFeatured event={events[0]} />
+        </div>
+        <div className="w-full lg:w-2/3 ">
+          <EventList events={events} />
+        </div>
       </section>
-      <section className="flex items-center justify-center w-full mt-10 space-x-10">
-        <div className="font-serif font-bold tracking-tighter text-center text-8xl">
+      <section className="flex items-center justify-center w-full mt-5 space-x-10 lg:mt-10">
+        <div className="text-6xl tracking-tight text-center md:text-7xl lg:text-8xl">
           <p>Dele</p>
           <p>Samarbeide</p>
           <p>Delta</p>
         </div>
       </section>
-      <section className="flex items-center justify-center w-full mt-10 space-x-10">
-        <ul className="w-2/3 px-10 py-10 text-xl text-center bg-black text-gray">
-          <li>Mandag Stengt</li>
-          <li>Tirsdag 16:00 – 00:00</li>
-          <li>Onsdag 16:00 – 00:00</li>
-          <li>Torsdag 16:00 – 00:00</li>
-          <li>Fredag 16:00 – 02:30</li>
-          <li>Lørdag 14:00 – 02:30</li>
-          <li>Søndag 14:00 – 00:00</li>
-        </ul>
+      <section className="mt-5 lg:mt-10">
+        <div className="w-full">
+          <OpeningHours />
+        </div>
       </section>
     </div>
   );
