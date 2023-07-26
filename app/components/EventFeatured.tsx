@@ -14,7 +14,7 @@ const EventFeatured = ({ event }: Props) => {
       <h2 className="text-lg text-center lg:text-xl">Neste arrangement</h2>
       <ClientSideRoute route={`/event/${event.slug.current}`}>
         <div className="mt-5 lg:mt-10">
-          <h3 className="font-serif text-3xl md:text-4xl lg:text-5xl leading-[0.8em] font-bold tracking-tighter text-center">
+          <h3 className="font-serif text-3xl md:text-4xl lg:text-5xl leading-[0.96em] font-bold tracking-tighter text-center">
             {event.title}
           </h3>
         </div>
