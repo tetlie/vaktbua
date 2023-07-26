@@ -3,6 +3,7 @@ import { urlForImage } from "@/sanity/lib/image";
 import Image from "next/image";
 import React from "react";
 import ClientSideRoute from "./ClientSideRoute";
+import Link from "next/link";
 
 type Props = {
   events: Event[];
@@ -10,7 +11,7 @@ type Props = {
 
 const EventList = ({ events }: Props) => {
   return (
-    <div className="p-5 bg-black lg:p-10 text-gray">
+    <div className="h-full p-5 bg-black lg:p-10 text-gray">
       <h2 className="font-serif text-3xl font-bold tracking-tighter text-center md:text-4xl lg:text-5xl">
         Arrangementer
       </h2>
@@ -33,6 +34,11 @@ const EventList = ({ events }: Props) => {
             </li>
           ))}
       </ul>
+      <Link target="_blank" href="https://www.facebook.com/vaktbua/events">
+        <p className="mt-5 text-lg text-center lg:mt-10 lg:text-xl">
+          Se alle arrangementer på Facebook
+        </p>
+      </Link>
     </div>
   );
 };

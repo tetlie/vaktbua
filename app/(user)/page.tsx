@@ -25,11 +25,11 @@ export default async function Home() {
           </p>
         </div>
       </section>
-      <section className="items-center w-full mt-5 space-y-5 lg:mt-10 lg:flex lg:space-x-10">
-        <div className="w-full lg:w-1/3 ">
+      <section className="items-center w-full h-full mt-5 space-y-5 lg:mt-10 lg:flex lg:space-x-10">
+        <div className="w-full lg:w-1/2">
           <EventFeatured event={events[0]} />
         </div>
-        <div className="w-full lg:w-2/3 ">
+        <div className="w-full lg:w-1/2 ">
           <EventList events={events} />
         </div>
       </section>

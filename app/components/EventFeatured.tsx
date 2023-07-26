@@ -10,7 +10,7 @@ type Props = {
 
 const EventFeatured = ({ event }: Props) => {
   return (
-    <div className="p-5 bg-black lg:p-10 grow text-gray">
+    <div className="h-full p-5 bg-black lg:p-10 grow text-gray">
       <h2 className="text-lg text-center lg:text-xl">Neste arrangement</h2>
       <ClientSideRoute route={`/event/${event.slug.current}`}>
         <div className="mt-5 lg:mt-10">
