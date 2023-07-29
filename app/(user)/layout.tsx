@@ -5,13 +5,34 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 import Image from "next/image";
+import { groq } from "next-sanity";
+import { client } from "@/sanity/lib/client";
+import urlFor from "@/lib/urlFor";
 
-export const metadata: Metadata = {
-  title: "Vaktbua",
-  description: "Dele - Samarbeide - Delta",
-};
+const query = groq`{
+  "globals": *[_type == "globals"][0] {
+  ...,
+  },
+}`;
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export async function generateMetadata(): Promise<Metadata> {
+  const data = await client.fetch(query);
+  const { globals } = data;
+  const imageUrl: string = urlFor(globals.image).url();
+  const title: string = globals.title || "Vaktbua";
+
+  return {
+    title: { default: title, template: `%s // ${title}` },
+    description: globals.description,
+    openGraph: {
+      images: [imageUrl],
+    },
+  };
+}
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const data = await client.fetch(query);
+  const { globals } = data;
   return (
     <html lang="nb">
       <body className="flex flex-col justify-between min-h-screen p-5 mx-auto overflow-x-hidden tracking-tight lg:p-10 max-w-screen bg-gray max-w-7xl">
@@ -33,8 +54,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <path d="m177.91,165.02c10.37,0,20.74.02,31.11-.03,1.35,0,1.8.31,1.78,1.73-.08,6.48-.07,12.97,0,19.45.01,1.35-.44,1.67-1.71,1.66-20.74-.19-41.48-.35-62.21-.48-1.46,0-2.03-.38-2.01-1.98.1-6.09.08-12.19.01-18.29-.01-1.28.39-1.58,1.61-1.58,10.48.04,20.96.02,31.44.02,0-.18,0-.35,0-.53Z" />
           </svg>
         </div>
-        <Header />
-        <main className="flex-grow mt-5 lg:mt-10">{children}</main>
+        <Header globals={globals} />
+        <main className="flex-grow">{children}</main>
         <Footer />
       </body>
     </html>
