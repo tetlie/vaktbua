@@ -2,18 +2,43 @@ type Base = {
   _createdAt: string;
   _id: string;
   _rev: string;
-  _type: string
+  _type: string;
   _updatedAt: string;
-}
+};
 
 interface Event extends Base {
   title: string;
   slug: Slug;
   body: Block[];
   categories: Category[];
-  mainImage: Image;
+  image: Image;
   description: string;
-  mainImage: Image;
+  dateTimeStart: string;
+  ticketUrl: string;
+}
+
+interface SoMeLink {
+  title: string;
+  url: string;
+}
+
+interface OpeningHours {
+  monday: string;
+  tuesday: string;
+  wednesday: string;
+  thursday: string;
+  friday: string;
+  saturday: string;
+  sunday: string;
+}
+
+interface Globals extends Base {
+  title: string;
+  description: string;
+  image: Image;
+  ticketUrl: string;
+  soMeLinks: SoMeLink[];
+  openingHours: OpeningHours;
 }
 
 interface Category extends Base {
@@ -48,5 +73,10 @@ interface Block {
   _type: "block";
   children: Span[];
   markDefs: any[];
-  style: "normal", "h1", "h2", "h3", "h4", "blockquote";
+  style: "normal";
+  h1;
+  h2;
+  h3;
+  h4;
+  blockquote;
 }
