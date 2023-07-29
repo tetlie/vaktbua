@@ -41,7 +41,7 @@ const Header = ({ globals }: Props) => {
             </p>
           </ClientSideRoute>
         </div>
-        <div className="grow">
+        <div className="px-5 grow">
           <p className="font-serif text-3xl font-normal leading-[0.96em] tracking-tighter text-center md:text-4xl lg:text-5xl">
             {openingHoursGreeting()}
           </p>
