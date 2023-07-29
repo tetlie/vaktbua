@@ -4,32 +4,38 @@ import { groq } from "next-sanity";
 import { client } from "@/sanity/lib/client";
 import EventFeatured from "../components/EventFeatured";
 import OpeningHours from "../components/OpeningHours";
+import PageTitle from "../components/PageTitle";
 
-const query = groq`
-  *[_type == "event"] {
+const query = groq`{
+  "globals": *[_type == "globals"][0] {
+  ...,
+  },
+  "events": *[_type == "event"] {
   ...,
   categories[]->
-  } | order(_createdAt desc)
-`;
+  } | order(dateTimeStart asc)
+}`;
 
 export const revalidate = 60;
 
 export default async function Home() {
-  const events = await client.fetch(query);
+  const data = await client.fetch(query);
+  const { events, globals } = data;
   return (
     <div>
-      <section>
+      <PageTitle title={globals.title} />
+      <section className="">
         <div className="flex flex-col items-center justify-center w-full">
           <p className="tracking-tight font-normal leading-[0.96em] text-center text-black text-3xl md:text-4xl lg:text-5xl">
-            Kristiansands gjemte perle, ved foten av Odderøya med konserter og stor solrik hage.
+            {globals.description}
           </p>
         </div>
       </section>
-      <section className="items-center w-full h-full mt-5 space-y-5 lg:mt-10 lg:flex lg:space-x-10">
-        <div className="w-full lg:w-1/2">
+      <section className="items-center w-full h-full mt-5 space-y-5 lg:mt-10 ">
+        <div className="w-full">
           <EventFeatured event={events[0]} />
         </div>
-        <div className="w-full lg:w-1/2 ">
+        <div className="w-full">
           <EventList events={events} />
         </div>
       </section>
