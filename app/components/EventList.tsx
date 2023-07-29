@@ -1,9 +1,7 @@
-import urlFor from "@/lib/urlFor";
-import { urlForImage } from "@/sanity/lib/image";
-import Image from "next/image";
 import React from "react";
 import ClientSideRoute from "./ClientSideRoute";
-import Link from "next/link";
+import dateFormatter from "@/lib/dateFormatter";
+import { PATH_EVENTS } from "@/lib/constants/paths";
 
 type Props = {
   events: Event[];
@@ -18,27 +16,26 @@ const EventList = ({ events }: Props) => {
       <ul className="mt-5 lg:mt-10">
         {events &&
           events.map((event) => (
-            <li key={event._id} className="py-1 border-b border-b-gray group">
-              <ClientSideRoute route={`/event/${event.slug.current}`}>
+            <li
+              key={event._id}
+              className="py-1 transition-all ease-in-out border-b hover:bg-gray hover:text-black hover:px-10 border-b-gray group"
+            >
+              <ClientSideRoute route={`/${PATH_EVENTS}/${event.slug.current}`}>
                 <div className="flex justify-between text-lg lg:text-xl">
                   <h3 className="leading-snug truncate">{event.title}</h3>
                   <p className="w-1/3 leading-snug text-right">
-                    {new Date(event._createdAt).toLocaleDateString("no", {
-                      day: "numeric",
-                      month: "long",
-                      year: "numeric",
-                    })}
+                    {dateFormatter(event.dateTimeStart)}
                   </p>
                 </div>
               </ClientSideRoute>
             </li>
           ))}
       </ul>
-      <Link target="_blank" href="https://www.facebook.com/vaktbua/events">
-        <p className="mt-5 text-lg text-center lg:mt-10 lg:text-xl">
-          Se alle arrangementer på Facebook
+      <ClientSideRoute route={`/${PATH_EVENTS}`}>
+        <p className="mt-5 text-lg text-center hover:underline lg:mt-10 lg:text-xl">
+          Se alle arrangementer
         </p>
-      </Link>
+      </ClientSideRoute>
     </div>
   );
 };

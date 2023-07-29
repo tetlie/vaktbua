@@ -5,12 +5,36 @@ import Image from "next/image";
 import urlFor from "@/lib/urlFor";
 import { PortableText } from "@portabletext/react";
 import { RichTextComponents } from "@/app/components/RichTextComponents";
+import dateFormatter from "@/lib/dateFormatter";
+import { Metadata } from "next";
+import PageTitle from "@/app/components/PageTitle";
+import Link from "next/link";
 
 type Props = {
   params: {
     slug: string;
   };
 };
+
+const query = groq`*[_type == "event" && slug.current == $slug][0]
+    {
+      ...,
+      categories[]->
+    }
+  `;
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = params;
+  const event: Event = await client.fetch(query, { slug });
+  const imageUrl: string = urlFor(event.image).url();
+  return {
+    title: event.title,
+    description: event.description,
+    openGraph: {
+      images: [imageUrl],
+    },
+  };
+}
 
 export const revalidate = 60;
 
@@ -26,24 +50,30 @@ export async function generateStaticParams() {
 }
 
 const Event = async ({ params: { slug } }: Props) => {
-  const query = groq`*[_type == "event" && slug.current == $slug][0]
-    {
-      ...,
-      categories[]->
-    }
-  `;
   const event: Event = await client.fetch(query, { slug });
   return (
     <article>
+      <PageTitle title={event.title} />
       <section>
+        <div className="mt-5 lg:mt-10">
+          <Link href={event.ticketUrl} target="_blank">
+            <p className="hover:underline tracking-tight font-normal leading-[0.96em] text-center text-black text-3xl md:text-4xl lg:text-5xl">
+              Billetter
+            </p>
+          </Link>
+        </div>
+      </section>
+      <section className="mt-5 lg:mt-10">
         <div>
           <div className="relative w-full transition-transform duration-200 ease-out h-[50vh]">
-            <Image
-              className="object-cover object-left lg:object-center"
-              src={urlFor(event.mainImage).url()}
-              alt={event.title}
-              fill
-            />
+            {event.image && (
+              <Image
+                className="object-cover object-left lg:object-center"
+                src={urlFor(event.image).url()}
+                alt={event.title}
+                fill
+              />
+            )}
           </div>
           <div className="mt-5 lg:mt-10">
             <div className="flex justify-between text-lg lg:text-xl">
@@ -59,20 +89,9 @@ const Event = async ({ params: { slug } }: Props) => {
                   </span>
                 ))}
               </div>
-              <p className="leading-0">
-                {new Date(event._createdAt).toLocaleDateString("no", {
-                  day: "numeric",
-                  month: "long",
-                  year: "numeric",
-                })}
-              </p>
+              <p className="leading-0">{dateFormatter(event.dateTimeStart)}</p>
             </div>
           </div>
-        </div>
-        <div className="flex flex-col items-center justify-center w-full mt-5 lg:mt-10">
-          <p className="text-6xl tracking-tight text-center leading-[0.96em] md:text-7xl lg:text-8xl">
-            {event.title}
-          </p>
         </div>
       </section>
     </article>
