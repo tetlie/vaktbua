@@ -33,6 +33,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       images: [imageUrl],
     },
+    alternates: {
+      canonical: `/events/${event.slug.current}`,
+    },
   };
 }
 
@@ -56,43 +59,47 @@ const Event = async ({ params: { slug } }: Props) => {
       <PageTitle title={event.title} />
       <section>
         <div className="mt-5 lg:mt-10">
+          <p className="tracking-tight font-normal leading-[0.96em] text-center text-black text-3xl md:text-4xl lg:text-5xl">
+            {event.description}
+          </p>
+        </div>
+        <div className="mt-5 lg:mt-10">
           <Link href={event.ticketUrl} target="_blank">
-            <p className="hover:underline tracking-tight font-normal leading-[0.96em] text-center text-black text-3xl md:text-4xl lg:text-5xl">
+            <span className="block font-serif text-3xl font-bold tracking-tighter text-center text-black hover:underline md:text-4xl lg:text-5xl">
               Billetter
-            </p>
+            </span>
           </Link>
         </div>
       </section>
       <section className="mt-5 lg:mt-10">
-        <div>
-          <div className="relative w-full transition-transform duration-200 ease-out h-[50vh]">
-            {event.image && (
-              <Image
-                className="object-cover object-left lg:object-center"
-                src={urlFor(event.image).url()}
-                alt={event.title}
-                fill
-              />
-            )}
-          </div>
-          <div className="mt-5 lg:mt-10">
-            <div className="flex justify-between text-lg lg:text-xl">
-              <div className="flex space-x-2">
-                {event.categories.map((category, i, arr) => (
-                  <span key={category._id}>
-                    <span>{category.title}</span>
-                    {i < arr.length - 1 && (
-                      <span className="pl-2" key={i}>
-                        /
-                      </span>
-                    )}
+        <div className="flex justify-between text-lg lg:text-xl">
+          <div className="flex space-x-2">
+            {event.categories.map((category, i, arr) => (
+              <span key={category._id}>
+                <span>{category.title}</span>
+                {i < arr.length - 1 && (
+                  <span className="pl-2" key={i}>
+                    /
                   </span>
-                ))}
-              </div>
-              <p className="leading-0">{dateFormatter(event.dateTimeStart)}</p>
-            </div>
+                )}
+              </span>
+            ))}
           </div>
+          <p className="leading-0">{dateFormatter(event.dateTimeStart)}</p>
         </div>
+        <div className="mt-5 lg:mt-10 relative w-full transition-transform duration-200 ease-out h-[50vh]">
+          {event.image && (
+            <Image
+              className="object-cover object-left lg:object-center"
+              src={urlFor(event.image).url()}
+              alt={event.title}
+              fill
+            />
+          )}
+        </div>
+      </section>
+      <section className="pt-5">
+        <PortableText value={event.body} components={RichTextComponents} />
       </section>
     </article>
   );
