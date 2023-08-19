@@ -72,6 +72,7 @@ export default defineType({
       name: "openingHours",
       title: "Opening Hours",
       type: "object",
+      description: "Leave blank to indicate 'Closed'.",
       fields: [
         {
           title: "Monday",

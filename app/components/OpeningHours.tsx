@@ -1,41 +1,36 @@
 import React from "react";
 
-const OpeningHours = () => {
-  const liClasses = "flex justify-between py-1 border-b border-b-gray";
+interface Props {
+  openingHours: OpeningHours;
+}
+
+const Day = ({ hours, index }: { hours: string; index: number }) => {
+  const norwegianDays = ["mandag", "tirsdag", "onsdag", "torsdag", "fredag", "lørdag", "søndag"];
+  const dayTitle = norwegianDays[index];
+  const isClosed = hours === "" || hours === "Stengt" || hours === "stengt" || hours === undefined;
+
+  return (
+    <li className="flex justify-between py-1 border-b border-b-gray">
+      <span className="capitalize">{dayTitle}</span>
+      <span>{isClosed ? "Stengt" : hours}</span>
+    </li>
+  );
+};
+
+const OpeningHours = ({ openingHours }: Props) => {
+  // this skips the empty value :(
+  const openingHoursArr = Object.values(openingHours);
+
   return (
     <div className="w-full p-5 text-center bg-black lg:p-10 text-gray">
       <h2 className="font-serif text-3xl font-bold tracking-tighter text-center md:text-4xl lg:text-5xl">
         Åpningstider
       </h2>
       <ul className="mt-5 text-lg leading-snug lg:mt-10 lg:text-xl">
-        <li className={liClasses}>
-          <span>Mandag</span>
-          <span>Stengt</span>
-        </li>
-        <li className={liClasses}>
-          <span>Tirsdag</span>
-          <span>16:00 – 00:00</span>
-        </li>
-        <li className={liClasses}>
-          <span>Onsdag</span>
-          <span>16:00 – 00:00</span>
-        </li>
-        <li className={liClasses}>
-          <span>Torsdag</span>
-          <span>16:00 – 00:00</span>
-        </li>
-        <li className={liClasses}>
-          <span>Fredag</span>
-          <span>16:00 – 02:30</span>
-        </li>
-        <li className={liClasses}>
-          <span>Lørdag</span>
-          <span>14:00 – 02:30</span>
-        </li>
-        <li className={liClasses}>
-          <span>Søndag</span>
-          <span>14:00 – 00:00</span>
-        </li>
+        {openingHoursArr.map((hours, index) => {
+          console.log(openingHoursArr.length);
+          return <Day index={index} hours={hours} />;
+        })}
       </ul>
     </div>
   );
