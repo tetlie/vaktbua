@@ -1,55 +1,92 @@
-import React from 'react'
+import React from "react";
 
-import Link from 'next/link'
-import Image from 'next/image'
-import urlFor from '@/lib/urlFor'
+import Link from "next/link";
+import Image from "next/image";
+import urlFor from "@/lib/urlFor";
+
+import urlBuilder from "@sanity/image-url";
+import { getImageDimensions } from "@sanity/asset-utils";
+
+// Barebones lazy-loaded image component
+const ImageComponent = ({ value }: any) => {
+  console.log(value);
+  const { width, height } = getImageDimensions(value);
+  return (
+    <figure>
+      <Image
+        src={urlFor(value).url()}
+        alt={value.alt}
+        loading="lazy"
+        width={width}
+        height={height}
+        style={{
+          // Display alongside text if image appears inside a block text span
+          display: "block",
+          // Avoid jumping around with aspect-ratio CSS property
+          aspectRatio: width / height,
+        }}
+      />
+      <figcaption></figcaption>
+    </figure>
+  );
+};
 
 export const RichTextComponents = {
   types: {
-    image: ({value}: any | undefined) => {
-      <div className='relative w-full m-10 mx-auto h-96'>
-        <Image
-          className='objet-contain'
-          src={urlFor(value).url()}
-          alt={value.alt}
-          fill
-        />
+    image: ({ value }: any) => (
+      <div className="mt-5">
+        <ImageComponent value={value} />
       </div>
-    },
+    ),
   },
   list: {
-    bullet: ({children}: any | undefined) => (
-      <ul className='py-5 ml-10 space-y-5 list-disc'>{children}</ul>
+    bullet: ({ children }: any | undefined) => (
+      <ul className="ml-5 text-lg leading-snug list-disc lg:mt-10 md:text-xl lg:text-2xl">
+        {children}
+      </ul>
     ),
-    number: ({children}: any | undefined) => (
-      <ol className='list-decimal mt-lg'>{children}</ol>
-    ),    
+    number: ({ children }: any | undefined) => <ol className="list-decimal mt-lg">{children}</ol>,
   },
   block: {
-    h1: ({children}: any | undefined) => <h1 className='py-10 text-5xl font-bold'>{children}</h1>,
-    h2: ({children}: any | undefined) => <h2 className='py-10 text-4xl font-bold'>{children}</h2>,
-    h3: ({children}: any | undefined) => <h3 className='py-10 text-3xl font-bold'>{children}</h3>,
-    h4: ({children}: any | undefined) => <h4 className='py-10 text-2xl font-bold'>{children}</h4>,
-    blockquote: ({children}: any | undefined) => (
-      <blockquote className='py-5 pl-5 my-5 border-l-4 border-l-white'>{children}</blockquote>
+    // h1: ({ children }: any | undefined) => <h1 className="py-10 text-5xl font-bold">{children}</h1>,
+    normal: ({ children }: any | undefined) => (
+      <p className="mt-5 text-lg leading-snug lg:mt-10 md:text-xl lg:text-2xl">{children}</p>
+    ),
+    h2: ({ children }: any | undefined) => (
+      <h2 className="mt-5 tracking-tight font-normal leading-[0.96em] text-black text-3xl md:text-4xl lg:text-5xl">
+        {children}
+      </h2>
+    ),
+    h3: ({ children }: any | undefined) => (
+      <h3 className="mt-5 tracking-tight font-normal leading-[0.96em] text-black text-2xl md:text-3xl lg:text-4xl">
+        {children}
+      </h3>
+    ),
+    h4: ({ children }: any | undefined) => (
+      <h4 className="mt-5 tracking-tight font-normal leading-[0.96em] text-black text-xl md:text-2xl lg:text-3xl">
+        {children}
+      </h4>
+    ),
+    blockquote: ({ children }: any | undefined) => (
+      <blockquote className="py-5 pl-5 mt-5 text-lg leading-snug border-l-2 border-l-black lg:mt-10 md:text-xl lg:text-2xl">
+        {children}
+      </blockquote>
     ),
   },
   marks: {
-    link: ({children, value}: any | undefined) => {
-      const rel = !value.href.startsWith('/')
-        ? 'noreferrer noopener'
-        : undefined;
-      const target = !value.href.startsWith('/') ? '_blank' : "";
+    link: ({ children, value }: any | undefined) => {
+      const rel = !value.href.startsWith("/") ? "noreferrer noopener" : undefined;
+      const target = !value.href.startsWith("/") ? "_blank" : "";
       return (
         <Link
           href={value.href}
           rel={rel}
           target={target}
-          className='underline decoration-white hover:decoration-black'
+          className="underline decoration-black hover:decoration-transparent"
         >
           {children}
         </Link>
-      )
+      );
     },
   },
-}
+};
