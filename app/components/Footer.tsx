@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -8,7 +9,10 @@ const Footer = () => {
           Odderøyveien 11, Bygg 3,
           <br /> 4610 Kristiansand
         </p>
-        <p className="tracking-tighter">booking@vaktbuakrs.no</p>
+
+        <Link href={`mailto:booking@vaktbuakrs.no`} className="tracking-tighter hover:underline">
+          booking@vaktbuakrs.no
+        </Link>
       </div>
       <p className="mt-5 text-lg lg:mt-10 lg:text-xl">© Vaktbua 2023</p>
     </footer>

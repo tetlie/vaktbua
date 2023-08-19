@@ -3,7 +3,7 @@ import React from "react";
 const Logo = () => {
   return (
     <svg
-      className="h-full z-50 w-[20vw] fill-gray animate-spin-slow"
+      className="h-full z-50 w-[20vw] md:w-[15vw] lg:w-[10vw] fill-gray animate-spin-slow"
       id="Layer_1"
       data-name="Layer 1"
       xmlns="http://www.w3.org/2000/svg"
