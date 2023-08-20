@@ -28,8 +28,8 @@ const OpeningHours = ({ openingHours }: Props) => {
       </h2>
       <ul className="mt-5 text-lg leading-snug lg:mt-10 lg:text-xl">
         {openingHoursArr.map((hours, index) => {
-          console.log(openingHoursArr.length);
-          return <Day index={index} hours={hours} />;
+          // console.log(openingHoursArr.length);
+          return <Day key={`hours-${index}`} index={index} hours={hours} />;
         })}
       </ul>
     </div>
