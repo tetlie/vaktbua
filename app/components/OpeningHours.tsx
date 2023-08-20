@@ -26,10 +26,13 @@ const OpeningHours = ({ openingHours }: Props) => {
         Åpningstider
       </h2>
       <ul className="mt-5 text-lg leading-snug lg:mt-10 lg:text-xl">
-        {openingHoursArr.map(({ title, hours }: Day) => {
+        {openingHoursArr.map(({ title, hours }: Day, index) => {
           return (
-            <li className="flex justify-between py-1 border-b border-b-gray">
-              <span className="capitalize">{title}</span>
+            <li
+              key={`openingHours-${index}`}
+              className="flex justify-between py-1 border-b border-b-gray"
+            >
+              <span>{title}</span>
               <span>{hours}</span>
             </li>
           );
