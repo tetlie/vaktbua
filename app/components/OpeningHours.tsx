@@ -4,22 +4,21 @@ interface Props {
   openingHours: OpeningHours;
 }
 
-const Day = ({ hours, index }: { hours: string; index: number }) => {
-  const norwegianDays = ["mandag", "tirsdag", "onsdag", "torsdag", "fredag", "lørdag", "søndag"];
-  const dayTitle = norwegianDays[index];
-  const isClosed = hours === "" || hours === "Stengt" || hours === "stengt" || hours === undefined;
-
-  return (
-    <li className="flex justify-between py-1 border-b border-b-gray">
-      <span className="capitalize">{dayTitle}</span>
-      <span>{isClosed ? "Stengt" : hours}</span>
-    </li>
-  );
-};
+interface Day {
+  title: string;
+  hours: string;
+}
 
 const OpeningHours = ({ openingHours }: Props) => {
-  // this skips the empty value :(
-  const openingHoursArr = Object.values(openingHours);
+  const openingHoursArr: Day[] = [
+    { title: "Mandag", hours: openingHours.monday },
+    { title: "Tirsdag", hours: openingHours.tuesday },
+    { title: "Onsdag", hours: openingHours.wednesday },
+    { title: "Torsdag", hours: openingHours.thursday },
+    { title: "Fredag", hours: openingHours.friday },
+    { title: "Lørdag", hours: openingHours.saturday },
+    { title: "Søndag", hours: openingHours.sunday },
+  ];
 
   return (
     <div className="w-full p-5 text-center bg-black lg:p-10 text-gray">
@@ -27,9 +26,13 @@ const OpeningHours = ({ openingHours }: Props) => {
         Åpningstider
       </h2>
       <ul className="mt-5 text-lg leading-snug lg:mt-10 lg:text-xl">
-        {openingHoursArr.map((hours, index) => {
-          // console.log(openingHoursArr.length);
-          return <Day key={`hours-${index}`} index={index} hours={hours} />;
+        {openingHoursArr.map(({ title, hours }: Day) => {
+          return (
+            <li className="flex justify-between py-1 border-b border-b-gray">
+              <span className="capitalize">{title}</span>
+              <span>{hours}</span>
+            </li>
+          );
         })}
       </ul>
     </div>
