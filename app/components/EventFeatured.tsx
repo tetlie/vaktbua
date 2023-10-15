@@ -19,6 +19,11 @@ const EventFeatured = ({ event }: Props) => {
           <h3 className="font-serif text-3xl md:text-4xl lg:text-5xl leading-[0.96em] group-hover:underline font-bold tracking-tighter text-center">
             {event.title}
           </h3>
+          <div className="flex items-center justify-center w-full mt-5 lg:mt-10">
+          {event.categories && event.categories.map((category) => (
+              <span className="px-2 py-1 text-sm border border-gray tag rounded-3xl">{category.title}</span>
+            ))}
+          </div>
         </div>
         <p className="mt-5 text-xl text-center lg:mt-10">{dateFormatter(event.dateTimeStart)}</p>
       </div>
