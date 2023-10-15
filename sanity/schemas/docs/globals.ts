@@ -111,6 +111,23 @@ export default defineType({
         },
       ],
     }),
+    defineField({
+      name: "contact",
+      title: "Contact",
+      type: "object",
+      fields: [
+        {
+          title: "Address",
+          name: "address",
+          type: "string",
+        },
+        {
+          title: "Email",
+          name: "email",
+          type: "string",
+        },
+      ],
+    }),
   ],
 
   preview: {

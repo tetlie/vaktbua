@@ -39,6 +39,10 @@ interface Globals extends Base {
   ticketUrl: string;
   soMeLinks: SoMeLink[];
   openingHours: OpeningHours;
+  contact: {
+    email: string;
+    address: string;
+  };
 }
 
 interface Category extends Base {

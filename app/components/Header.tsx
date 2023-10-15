@@ -1,13 +1,14 @@
 import React from "react";
 import ClientSideRoute from "./ClientSideRoute";
 import { PATH_EVENTS } from "@/lib/constants/paths";
+import Link from "next/link";
 
 type Props = {
   globals: Globals;
 };
 
 const Header = ({ globals }: Props) => {
-  const { openingHours } = globals;
+  const { openingHours, ticketUrl } = globals;
 
   const openingHoursGreeting = () => {
     const today = new Date();
@@ -46,13 +47,20 @@ const Header = ({ globals }: Props) => {
             {openingHoursGreeting()}
           </p>
         </div>
-        <div className="w-1/4">
-          <ClientSideRoute route={`/${PATH_EVENTS}`}>
-            <p className="hover:underline text-lg font-normal text-right leading-[0.96em] tracking-tight lg:text-xl">
-              Events
-            </p>
-          </ClientSideRoute>
-        </div>
+        <nav className="w-1/4">
+          <ul className="lg:flex lg:justify-end lg:space-x-4 space-y-2 lg:space-y-0 text-lg font-normal text-right leading-[0.96em] tracking-tight lg:text-xl">
+            <li className="hover:underline">
+              <ClientSideRoute route={`/${PATH_EVENTS}`}>
+                  Events
+              </ClientSideRoute>
+            </li>
+            <li className="hover:underline">
+              <Link href={ticketUrl} target="_blank">
+                Billetter
+              </Link>
+            </li>
+          </ul>
+        </nav>
       </div>
     </header>
   );
