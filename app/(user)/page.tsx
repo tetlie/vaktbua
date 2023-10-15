@@ -48,7 +48,7 @@ export default async function Home() {
           <EventFeatured event={nextEvent} />
         </div>
         <div className="w-full">
-          <EventList heading="Denne uken på Vaktbua" events={eventsThisWeek} />
+          <EventList heading="Denne uken på Vaktbua" events={eventsThisWeek} seeAll />
         </div>
       </section>
       <section className="flex items-center justify-center w-full mt-5 space-x-10 lg:mt-10">

@@ -45,7 +45,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         </div>
         <Header globals={globals} />
         <main className="flex-grow">{children}</main>
-        <Footer />
+        <Footer globals={globals} />
       </body>
     </html>
   );
