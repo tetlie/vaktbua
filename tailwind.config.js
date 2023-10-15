@@ -11,6 +11,10 @@ module.exports = {
       serif: ["Times New Roman", "Times", "serif"],
     },
     extend: {
+      aspectRatio: {
+        "3/2": "3 / 2",
+        "2/3": "2 / 3",
+      },
       colors: {
         black: "#000",
         white: "white",

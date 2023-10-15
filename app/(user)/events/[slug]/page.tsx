@@ -98,7 +98,7 @@ const Event = async ({ params: { slug } }: Props) => {
 
           <p className="leading-0">{dateFormatter(event.dateTimeStart)}</p>
         </div>
-        <div className="mt-5 lg:mt-10 relative w-full transition-transform duration-200 ease-out h-[50vh]">
+        <div className="relative w-full mx-auto mt-5 overflow-hidden transition-transform duration-200 ease-out lg:mt-10 aspect-2/3 md:aspect-3/2 rounded-3xl">
           {event.image && (
             <Image
               className="object-cover object-left lg:object-center"
