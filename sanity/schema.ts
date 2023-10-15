@@ -4,8 +4,8 @@ import blockContent from "./schemas/blockContent";
 import category from "./schemas/docs/category";
 import event from "./schemas/docs/event";
 import globals from "./schemas/docs/globals";
-import post from "./schemas/docs/post";
+import page from "./schemas/docs/page";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [event, category, post, globals, blockContent],
+  types: [event, category, page, globals, blockContent],
 };

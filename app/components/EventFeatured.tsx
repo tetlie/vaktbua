@@ -20,7 +20,7 @@ const EventFeatured = ({ event }: Props) => {
             {event.title}
           </h3>
           <div className="flex items-center justify-center w-full mt-5 lg:mt-10">
-          {event.categories && event.categories.map((category) => (
+          {event.categories.length > 0 && event.categories.map((category) => (
               <span className="px-2 py-1 text-sm border border-gray tag rounded-3xl">{category.title}</span>
             ))}
           </div>

@@ -38,10 +38,10 @@ export default async function Events() {
           {nextEvent && <EventFeatured event={nextEvent} />}
         </div>
         <div className="w-full">
-          {upcomingEvents.length > 0 && <EventList heading="Kommende arrangement" events={upcomingEvents} />}
+          {upcomingEvents.length > 0 && <EventList heading="Kommende" events={upcomingEvents} />}
         </div>
         <div className="w-full">
-          {pastEvents.length > 0 && <EventList heading="Tidligere arrangement" events={pastEvents} />}
+          {pastEvents.length > 0 && <EventList heading="Tidligere" events={pastEvents} />}
         </div>
       </section>
     </div>

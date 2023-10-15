@@ -17,6 +17,14 @@ interface Event extends Base {
   ticketUrl: string;
 }
 
+interface Page extends Base {
+  title: string;
+  slug: Slug;
+  body: Block[];
+  image: Image;
+  description: string;
+}
+
 interface SoMeLink {
   title: string;
   url: string;
