@@ -6,30 +6,42 @@ import EventFeatured from "../../components/EventFeatured";
 import OpeningHours from "../../components/OpeningHours";
 import PageTitle from "@/app/components/PageTitle";
 
+
 const query = groq`{
   "globals": *[_type == "globals"][0] {
   ...,
   },
-  "events": *[_type == "event"] {
+  "upcomingEvents": *[_type == "event" && dateTimeStart >= now()] {
   ...,
   categories[]->
-  } | order(dateTimeStart asc)
+  } | order(dateTimeStart asc),
+  "pastEvents": *[_type == "event" && dateTimeStart < now()] {
+  ...,
+  categories[]->
+  } | order(dateTimeStart desc),
 }`;
 
 export const revalidate = 60;
 
 export default async function Events() {
   const data = await client.fetch(query);
-  const { events, globals } = data;
+  const { upcomingEvents, pastEvents } = data;
+  const nextEvent = upcomingEvents[0];
+
+  console.log("nextEvent", nextEvent);
+
   return (
     <div>
-      <PageTitle title={"Events"} />
+      <PageTitle title={"Arrangement"} />
       <section className="items-center w-full h-full mt-5 space-y-5 lg:mt-10 ">
         <div className="w-full">
-          <EventFeatured event={events[0]} />
+          {nextEvent && <EventFeatured event={nextEvent} />}
         </div>
         <div className="w-full">
-          <EventList events={events} />
+          {upcomingEvents.length > 0 && <EventList heading="Kommende arrangement" events={upcomingEvents} />}
+        </div>
+        <div className="w-full">
+          {pastEvents.length > 0 && <EventList heading="Tidligere arrangement" events={pastEvents} />}
         </div>
       </section>
     </div>
