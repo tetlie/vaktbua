@@ -18,7 +18,7 @@ const query = groq`{
 export async function generateMetadata(): Promise<Metadata> {
   const data = await client.fetch(query);
   const { globals } = data;
-  const imageUrl: string = urlFor(globals.image).url();
+  const imageUrl: string = globals.image ? urlFor(globals.image).url() : "";
   const title: string = globals.title || "Vaktbua";
 
   return {

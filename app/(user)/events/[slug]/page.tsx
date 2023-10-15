@@ -26,7 +26,7 @@ const query = groq`*[_type == "event" && slug.current == $slug][0]
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = params;
   const event: Event = await client.fetch(query, { slug });
-  const imageUrl: string = urlFor(event.image).url();
+  const imageUrl: string = event.image ? urlFor(event.image).url() : "";
   return {
     title: event.title,
     description: event.description,
