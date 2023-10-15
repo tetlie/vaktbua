@@ -30,27 +30,34 @@ const EventList = ({ heading = "Arrangementer", events, seeAll }: Props) => {
                   <div className="flex justify-between text-lg lg:text-xl">
                     <h3 className="leading-snug truncate">{event.title}</h3>
                     <div className="flex items-center space-x-4">
-                    <div className="flex flex-wrap space-x-2">
-            {event.categories && event.categories.map((category) => (
-              <span className="block px-2 py-0.5 text-sm border border-gray group-hover:border-black tag rounded-3xl">{category.title}</span>
-            ))}
-          </div>
-                    <p className="leading-snug text-right">
-                      {dateFormatter(event.dateTimeStart)}
-                    </p>
-                  </div>
+                      <div className="flex flex-wrap space-x-2">
+                        {event.categories &&
+                          event.categories.map((category) => (
+                            <span
+                              key={`${event._id}-${category._id}`}
+                              className="block px-2 py-0.5 text-sm border border-gray group-hover:border-black tag rounded-3xl"
+                            >
+                              {category.title}
+                            </span>
+                          ))}
+                      </div>
+                      <p className="leading-snug text-right">
+                        {dateFormatter(event.dateTimeStart)}
+                      </p>
+                    </div>
                   </div>
                 </ClientSideRoute>
               </li>
             );
           })}
       </ul>
-      {seeAll && <ClientSideRoute route={`/${PATH_EVENTS}`}>
-        <p className="mt-5 text-lg text-center hover:underline lg:mt-10 lg:text-xl">
-          Se alle arrangementer
-        </p>
-      </ClientSideRoute>
-      }
+      {seeAll && (
+        <ClientSideRoute route={`/${PATH_EVENTS}`}>
+          <p className="mt-5 text-lg text-center hover:underline lg:mt-10 lg:text-xl">
+            Se alle arrangementer
+          </p>
+        </ClientSideRoute>
+      )}
     </div>
   );
 };
