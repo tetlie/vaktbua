@@ -4,6 +4,7 @@ export default defineType({
   name: "event",
   title: "Event",
   type: "document",
+  icon: () => "🗓",
   fields: [
     defineField({
       name: "title",
@@ -71,6 +72,18 @@ export default defineType({
       type: "blockContent",
     }),
   ],
+  orderings: [
+    {
+      title: "Date, Newest",
+      name: "releaseDateDesc",
+      by: [{ field: "dateTimeStart", direction: "desc" }],
+    },
+    {
+      title: "Date, Oldest",
+      name: "releaseDateAsc",
+      by: [{ field: "dateTimeStart", direction: "asc" }],
+    },
+  ],
 
   preview: {
     select: {
@@ -80,9 +93,17 @@ export default defineType({
       media: "image",
     },
     prepare(selection) {
-      const { dateTimeStart } = selection;
+      const { dateTimeStart, category } = selection;
       const date = new Date(dateTimeStart);
-      return { ...selection, subtitle: date && ` ${date}` };
+      const options: Intl.DateTimeFormatOptions = {
+        weekday: "short",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      };
+      const formattedDate = date.toLocaleDateString("en-US", options);
+
+      return { ...selection, subtitle: `${formattedDate}` };
     },
   },
 });

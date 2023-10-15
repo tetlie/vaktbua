@@ -4,6 +4,7 @@ export default defineType({
   name: "globals",
   title: "Globals",
   type: "document",
+  icon: () => "⛓️",
   fields: [
     defineField({
       name: "title",

@@ -4,6 +4,7 @@ export default defineType({
   name: "category",
   title: "Category",
   type: "document",
+  icon: () => "💭",
   fields: [
     defineField({
       name: "title",
@@ -11,4 +12,10 @@ export default defineType({
       type: "string",
     }),
   ],
+  preview: {
+    select: {
+      title: "title",
+      media: "image",
+    },
+  },
 });
