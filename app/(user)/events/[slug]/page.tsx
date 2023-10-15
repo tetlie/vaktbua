@@ -5,7 +5,6 @@ import Image from "next/image";
 import urlFor from "@/lib/urlFor";
 import { PortableText } from "@portabletext/react";
 import { RichTextComponents } from "@/app/components/RichTextComponents";
-import dateFormatter from "@/lib/dateFormatter";
 import { Metadata } from "next";
 import PageTitle from "@/app/components/PageTitle";
 import Link from "next/link";
@@ -52,6 +51,17 @@ export async function generateStaticParams() {
   }));
 }
 
+function dateFormatter(date: any) {
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  };
+  return new Date(date).toLocaleDateString("no-NO", options);
+}
+
 const Event = async ({ params: { slug } }: Props) => {
   const event: Event = await client.fetch(query, { slug });
   return (
@@ -85,6 +95,7 @@ const Event = async ({ params: { slug } }: Props) => {
               </span>
             ))}
           </div>
+
           <p className="leading-0">{dateFormatter(event.dateTimeStart)}</p>
         </div>
         <div className="mt-5 lg:mt-10 relative w-full transition-transform duration-200 ease-out h-[50vh]">
