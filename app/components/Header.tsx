@@ -25,8 +25,8 @@ const Header = ({ globals }: Props) => {
     const isClosed =
       hours === "" || hours === "Stengt" || hours === "stengt" || hours === undefined;
 
-    const stringStart = `I dag (${dayTitle}) er Vaktbua`;
-    const stringEnd = isClosed ? "stengt" : ` åpent ${hours}`;
+    const stringStart = `I dag (${dayTitle}) er vi`;
+    const stringEnd = isClosed ? "stengt" : ` åpen ${hours}`;
     const string = `${stringStart} ${stringEnd}`;
 
     return string;
@@ -43,7 +43,7 @@ const Header = ({ globals }: Props) => {
           </ClientSideRoute>
         </div>
         <div className="px-5 grow">
-          <p className="font-serif text-3xl font-normal leading-[0.96em] tracking-tighter text-center md:text-4xl lg:text-5xl">
+          <p className="font-serif text-xl font-normal leading-[0.96em] tracking-tighter text-center md:text-3xl lg:text-4xl">
             {openingHoursGreeting()}
           </p>
         </div>
