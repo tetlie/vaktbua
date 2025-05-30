@@ -73,13 +73,15 @@ const Event = async ({ params: { slug } }: Props) => {
             {event.description}
           </p>
         </div>
-        <div className="mt-5 lg:mt-10">
-          <Link href={event.ticketUrl} target="_blank">
-            <span className="block font-serif text-3xl font-bold tracking-tighter text-center text-black hover:underline md:text-4xl lg:text-5xl">
-              Billetter
-            </span>
-          </Link>
-        </div>
+        {event.ticketUrl && ( 
+          <div className="mt-5 lg:mt-10">
+            <Link href={event.ticketUrl} target="_blank">
+              <span className="block font-serif text-3xl font-bold tracking-tighter text-center text-black hover:underline md:text-4xl lg:text-5xl">
+                Billetter
+              </span>
+            </Link>
+          </div>
+        )}
       </section>
       <section className="mt-5 lg:mt-10">
         <div className="flex justify-between text-lg lg:text-xl">

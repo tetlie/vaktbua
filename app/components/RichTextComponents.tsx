@@ -9,7 +9,6 @@ import { getImageDimensions } from "@sanity/asset-utils";
 
 // Barebones lazy-loaded image component
 const ImageComponent = ({ value }: any) => {
-  console.log(value);
   const { width, height } = getImageDimensions(value);
   return (
     <figure>
@@ -75,6 +74,9 @@ export const RichTextComponents = {
   },
   marks: {
     link: ({ children, value }: any | undefined) => {
+      if (!value || !value.href) {
+        return <span>{children}</span>;
+      }
       const rel = !value.href.startsWith("/") ? "noreferrer noopener" : undefined;
       const target = !value.href.startsWith("/") ? "_blank" : "";
       return (
