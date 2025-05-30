@@ -21,8 +21,6 @@ export default async function FourOhFour() {
   const data = await client.fetch(query);
   const { nextEvent, events, globals } = data;
 
-
-
   return (
     <div>
       <PageTitle title="{globals.title}" />
